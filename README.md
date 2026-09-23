@@ -16,6 +16,17 @@ Every project below is described with architecture, screenshots and results. **S
 | 6 | [IELTS AI Tutor](./ielts-ai-tutor/) | Writing & speaking practice with instant AI feedback on 6 criteria / 19 error types | React · Vite · OpenAI/Azure Speech | UI complete |
 | 7 | [Mongolian LLM Benchmark](./mongolian-llm-benchmark/) | Which open LLM understands Mongolian best? Qwen vs GLM comparison | Python · OpenRouter | Results published |
 
+## Mongolian speech models
+
+Mongolian has almost no open speech-AI support, so the voice platform runs on models I fine-tuned myself. Model cards are public; weights stay private.
+
+| Model | What it does | Headline result |
+|---|---|---|
+| [Whisper large-v3 — Mongolian LoRA](https://huggingface.co/Enkhbat0822/whisper-large-v3-mongolian) | Mongolian speech-to-text, including 8 kHz telephone audio | Word error rate 94.2 → **27.9** (telephony 103.7 → **36.3**), English preserved |
+| [CosyVoice 3 — Mongolian serving stack](https://huggingface.co/Enkhbat0822/cosyvoice3-mongolian) | Mongolian text-to-speech in production | Own voice, no cloud API, audio never leaves the country |
+| [CosyVoice 3 — Mongolian v2](https://huggingface.co/Enkhbat0822/cosyvoice3-mongolian-v2) / [v3](https://huggingface.co/Enkhbat0822/cosyvoice3-mongolian-v3) | The fine-tunes behind that voice | Emotion control kept by freezing the decoder |
+| [OmniVoice — Mongolian LoRA](https://huggingface.co/Enkhbat0822/omnivoice-mongolian-lora) | Alternative TTS backbone | 10.5 h of data, 43 min on one RTX 4090 |
+
 ## What ties them together
 - **Domain first.** Each tool solves a problem I ran into as an operator, WFM analyst or product owner — not a tutorial project.
 - **Full-local by design.** Banking data cannot leave the country, so STT, LLM and TTS all run on infrastructure I control.
