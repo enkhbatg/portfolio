@@ -14,6 +14,10 @@
 - **Learning path** and progress tracking; subscription plans with local (QPay) and international (card, Apple/Google Pay, PayPal, WeChat, Alipay) payment screens
 
 ## 2. Screenshots
+**The feedback report** — every error in the essay is highlighted and typed (word choice, grammar, word form, spelling, article, referencing, tense, word order), scored against the four official criteria, with the band score and word count alongside.
+
+![Feedback report](screenshots/09-feedback-report.png)
+
 | | |
 |---|---|
 | ![Home](screenshots/01-home.png) | ![Writing](screenshots/02-writing.png) |
