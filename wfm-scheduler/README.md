@@ -41,11 +41,22 @@ flowchart LR
 ## 5. Screenshots
 Staff names and employee IDs in these screenshots are replaced with pseudonyms; the underlying data is not public.
 
+**Required vs scheduled coverage** — a month of forecast demand (233,134 calls) against staffed agents, half-hour granularity. Coverage gaps are flagged before the roster is published.
+
+![Scheduling coverage](screenshots/10-scheduling-coverage.png)
+
+**Day view: shifts, breaks and absences on one timeline** — each agent's working blocks, lunch, short breaks, day-offs, maternity leave and vacation, with required vs working headcount per hour along the top.
+
+![Day shift timeline](screenshots/12-day-shift-timeline.png)
+
+**Real-time: call volume vs staffing** — forecast, actual, served and queued calls against required, scheduled and actually-working agents.
+
+![Real-time volume](screenshots/11-realtime-volume.png)
+
 | | |
 |---|---|
-| ![Demand forecasting](screenshots/02-forecasting.png) | ![Scheduling](screenshots/03-scheduling.png) |
-| ![Schedule wizard](screenshots/05-auto-schedule.png) | ![Staffing grid](screenshots/04-staffing.png) |
-| ![Real-time adherence](screenshots/01-realtime.png) | ![Performance analytics](screenshots/07-performance.png) |
+| ![Demand forecasting](screenshots/02-forecasting.png) | ![Schedule wizard](screenshots/05-auto-schedule.png) |
+| ![Staffing grid](screenshots/04-staffing.png) | ![Performance analytics](screenshots/07-performance.png) |
 | ![Requests](screenshots/06-requests.png) | ![Insights](screenshots/09-insights.png) |
 
 ## 6. Stack
