@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title | default: site.title }}</title>
+<meta name="description" content="{{ site.description }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ page.title | default: site.title }}">
+<meta property="og:description" content="{{ site.description }}">
+<meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/social-preview.png">
+<style>
+  :root{
+    --ink:#171a21; --mute:#687080; --accent:#4854e0; --bg:#f7f7f5;
+    --card:#fff; --line:#e4e6ee; --tint:#e9ebfc; --code:#f1f2f6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#eceef4; --mute:#9aa3b5; --accent:#94a0ff; --bg:#12141a;
+      --card:#1a1d25; --line:#2a2e39; --tint:#232a4a; --code:#1e222b;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#eceef4; --mute:#9aa3b5; --accent:#94a0ff; --bg:#12141a;
+    --card:#1a1d25; --line:#2a2e39; --tint:#232a4a; --code:#1e222b;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:0 16px 80px}
+  .back{
+    display:inline-block; margin:28px 0 8px; color:var(--accent);
+    text-decoration:none; font-weight:600; font-size:15.5px;
+  }
+  .back:hover{text-decoration:underline}
+  h1{font-size:clamp(30px,5vw,42px); line-height:1.12; letter-spacing:-.02em; margin:18px 0 14px}
+  h2{font-size:clamp(21px,3vw,26px); margin:46px 0 14px; letter-spacing:-.01em;
+     padding-top:18px; border-top:1px solid var(--line)}
+  h3{font-size:19px; margin:30px 0 10px}
+  p, li{max-width:70ch}
+  blockquote{
+    margin:20px 0; padding:2px 0 2px 20px; border-left:4px solid var(--accent);
+    color:var(--mute); font-size:18px;
+  }
+  a{color:var(--accent)}
+  img{max-width:100%; height:auto; border-radius:10px; border:1px solid var(--line); display:block}
+  table{width:100%; border-collapse:collapse; font-size:15.5px; margin:18px 0; display:block; overflow-x:auto}
+  th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{color:var(--mute); font-weight:600; font-size:13px; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap}
+  td img{min-width:220px}
+  code{background:var(--code); padding:2px 6px; border-radius:5px; font-size:14.5px}
+  pre{background:var(--code); padding:16px; border-radius:10px; overflow-x:auto; border:1px solid var(--line)}
+  pre code{background:none; padding:0}
+  .mermaid{
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:20px; margin:20px 0; text-align:center; overflow-x:auto;
+  }
+  hr{border:0; border-top:1px solid var(--line); margin:40px 0}
+  footer{margin-top:60px; padding-top:22px; border-top:1px solid var(--line);
+         color:var(--mute); font-size:15px}
+  footer a{font-weight:600; text-decoration:none}
+  footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="{{ site.baseurl }}/">← All projects</a>
+  {{ content }}
+  <footer>
+    <p><a href="{{ site.baseurl }}/">Portfolio</a> · <a href="https://github.com/enkhbatg/portfolio">GitHub</a> · <a href="https://huggingface.co/Enkhbat0822">Hugging Face</a> · enkhbat.ga@gmail.com</p>
+  </footer>
+</div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  // Jekyll renders ```mermaid blocks as <pre><code class="language-mermaid">; convert them.
+  document.querySelectorAll('pre > code.language-mermaid').forEach((code) => {
+    const host = document.createElement('div');
+    host.className = 'mermaid';
+    host.textContent = code.textContent;
+    code.parentElement.replaceWith(host);
+  });
+  const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: dark ? 'dark' : 'default',
+    themeVariables: { fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif' },
+  });
+</script>
+</body>
+</html>

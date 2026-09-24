@@ -1,0 +1,14 @@
+title: Enkhbat Gansukh — Project Portfolio
+description: >-
+  AI Product Owner and Business Analyst in Auckland. 15 years in contact centres,
+  workforce management and CX. Seven systems built end to end.
+url: https://enkhbatg.github.io
+baseurl: /portfolio
+exclude:
+  - LICENSE.md
+  - .claude
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
