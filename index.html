@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Enkhbat Gansukh — Project Portfolio</title>
-<meta name="description" content="AI Product Owner and Business Analyst in Auckland. 15 years in contact centres, workforce management and CX. Seven systems built end to end, including a Mongolian AI voice-agent platform.">
+<meta name="description" content="AI Product Owner and Business Analyst in Auckland. 15 years in contact centres, workforce management and CX. Nine systems built end to end, including a Mongolian AI voice-agent platform.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://enkhbatg.github.io/portfolio/">
 <meta property="og:title" content="Enkhbat Gansukh — Project Portfolio">
-<meta property="og:description" content="AI Product Owner and Business Analyst, Auckland. 15 years in contact centres and workforce management. Seven systems built end to end, including a Mongolian AI voice-agent platform.">
+<meta property="og:description" content="AI Product Owner and Business Analyst, Auckland. 15 years in contact centres and workforce management. Nine systems built end to end, including a Mongolian AI voice-agent platform.">
 <meta property="og:image" content="https://enkhbatg.github.io/portfolio/social-preview.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta property="og:site_name" content="Enkhbat Gansukh">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Enkhbat Gansukh — Project Portfolio">
-<meta name="twitter:description" content="15 years in contact centres and workforce management. Seven systems built end to end, including a Mongolian AI voice-agent platform.">
+<meta name="twitter:description" content="15 years in contact centres and workforce management. Nine systems built end to end, including a Mongolian AI voice-agent platform.">
 <meta name="twitter:image" content="https://enkhbatg.github.io/portfolio/social-preview.png">
 
 <style>
@@ -95,7 +95,7 @@
   <p class="lead">In 2025 I started building the tools myself rather than only specifying them. Every project below was built end to end and is described with architecture, screenshots and results. <strong>Source code is private</strong>; I am happy to walk through any of it in an interview.</p>
   <ul class="facts">
     <li><b>15 years</b> in contact centres, WFM and CX</li>
-    <li><b>7 systems</b> built end to end, from telephony to UI</li>
+    <li><b>9 systems</b> built end to end, from telephony to speech models</li>
     <li><b>Own speech models</b> for a language the cloud ignores</li>
   </ul>
 </header>
@@ -108,6 +108,20 @@
     <h3>VoiceOS</h3>
     <p>A customer calls a normal phone number and an AI operator answers in Mongolian, looks up their data and resolves the request. Includes a 16-screen admin console.</p>
     <div class="tags"><span class="tag">Asterisk</span><span class="tag">LiveKit</span><span class="tag">Python</span><span class="tag">pgvector</span></div>
+  </a>
+
+  <a class="card" href="speech-models/">
+    <span class="status">In production</span>
+    <h3>Mongolian Speech Models</h3>
+    <p>Fine-tuned speech recognition and synthesis for a language no cloud provider supports. Word error rate 94 → 15, with the measurement mistake that nearly hid it.</p>
+    <div class="tags"><span class="tag">Whisper</span><span class="tag">LoRA</span><span class="tag">CosyVoice 3</span><span class="tag">KenLM</span></div>
+  </a>
+
+  <a class="card" href="meeting-minutes/">
+    <span class="status">Shipped Oct 2026</span>
+    <h3>Meeting Minutes Agent</h3>
+    <p>Recording to signed-off minutes in the official committee format, with each attendee emailed only their own action items. Built into the same console.</p>
+    <div class="tags"><span class="tag">Diarization</span><span class="tag">FastAPI</span><span class="tag">Microsoft Graph</span></div>
   </a>
 
   <a class="card" href="wfm-scheduler/">
@@ -160,18 +174,23 @@
   <thead><tr><th>Model</th><th>What it does</th><th>Headline result</th></tr></thead>
   <tbody>
     <tr>
-      <td><a href="https://huggingface.co/Enkhbat0822/whisper-large-v3-mongolian">Whisper large-v3 — Mongolian LoRA</a></td>
-      <td>Mongolian speech to text, including 8 kHz telephone audio</td>
-      <td>Word error rate 94.2 → <strong>27.9</strong>; telephony 103.7 → <strong>36.3</strong>; English preserved</td>
+      <td><a href="speech-models/">Whisper large-v3 — Mongolian LoRA</a></td>
+      <td>Mongolian speech to text, including 8 kHz telephone audio and Kazakh</td>
+      <td>Word error rate 94.2 → <strong>14.7</strong>; telephony 18.7; Kazakh 18.9</td>
+    </tr>
+    <tr>
+      <td><a href="speech-models/">OmniASR CTC 1B — Mongolian</a></td>
+      <td>Alternative recogniser with language-model decoding</td>
+      <td>FLEURS 36.6 → <strong>18.2</strong> once a KenLM language model is added</td>
     </tr>
     <tr>
       <td><a href="https://huggingface.co/Enkhbat0822/cosyvoice3-mongolian">CosyVoice 3 — Mongolian</a></td>
-      <td>Mongolian text to speech in production</td>
+      <td>Mongolian text to speech in production, four fine-tune iterations</td>
       <td>Own voice, no cloud API, audio never leaves the country</td>
     </tr>
     <tr>
       <td><a href="https://huggingface.co/Enkhbat0822/omnivoice-mongolian-lora">OmniVoice — Mongolian LoRA</a></td>
-      <td>Alternative text-to-speech backbone</td>
+      <td>Alternative speech-synthesis backbone</td>
       <td>10.5 hours of data, 43 minutes on one RTX 4090</td>
     </tr>
   </tbody>

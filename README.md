@@ -8,13 +8,15 @@ Every project below is described with architecture, screenshots and results. **S
 
 | # | Project | One line | Stack | Status |
 |---|---|---|---|---|
-| 1 | [VoiceOS](./voiceos/) | Mongolian-language AI voice agent platform: phone number → AI operator, with a 14-screen admin console | Asterisk · LiveKit · Python · FastAPI · Postgres/pgvector · fine-tuned Whisper & CosyVoice | Ran in production on a real phone number (2026) |
-| 2 | [Contact Centre WFM](./wfm-scheduler/) | Forecasting and shift scheduling with constraint optimisation | React · Node/Hono · FastAPI · OR-Tools CP-SAT · Postgres | v9.7, used with real contact-centre data |
-| 3 | [Voice QA Pipeline](./voice-qa/) | Score 100% of calls instead of 1–3%: audio → transcript → PII masking → LLM scorecard | ffmpeg · Whisper · diarization · Presidio · local LLM · FastAPI | POC, on-prem ready |
-| 4 | [Agentic Commerce Gateway](./agentic-commerce/) | Multi-tenant MCP server that lets AI assistants search, check stock and buy from local merchants | Node/TS · Postgres RLS · MCP · OAuth | Working, 17 test suites green |
-| 5 | [Life OS](./life-os/) | Mobile "second brain": capture → organise → plan → execute, offline-first | Expo/React Native · Supabase · pgvector | MVP paused |
-| 6 | [IELTS AI Tutor](./ielts-ai-tutor/) | Writing & speaking practice with instant AI feedback on 6 criteria / 19 error types | React · Vite · OpenAI/Azure Speech | UI complete |
-| 7 | [Mongolian LLM Benchmark](./mongolian-llm-benchmark/) | Which open LLM understands Mongolian best? Qwen vs GLM comparison | Python · OpenRouter | Results published |
+| 1 | [VoiceOS](./voiceos/) | Mongolian AI voice agent platform: a phone number answered by an AI operator, with a 16-screen admin console | Asterisk · LiveKit · Python · FastAPI · Postgres/pgvector | Live in production |
+| 2 | [Mongolian Speech Models](./speech-models/) | Fine-tuned speech recognition and synthesis for a language no cloud provider supports | Whisper · LoRA · CosyVoice 3 · KenLM · fairseq2 | In production |
+| 3 | [Meeting Minutes Agent](./meeting-minutes/) | Recording to signed-off minutes in the official committee format, with per-person task emails | Diarization · FastAPI · Postgres · Microsoft Graph | Shipped Oct 2026 |
+| 4 | [Contact Centre WFM](./wfm-scheduler/) | Forecasting and shift scheduling with constraint optimisation | React · Node/Hono · FastAPI · OR-Tools CP-SAT · Postgres | v9.7, real contact-centre data |
+| 5 | [Voice QA Pipeline](./voice-qa/) | Score 100% of calls instead of 1–3%: audio to transcript to PII masking to an LLM scorecard | ffmpeg · Whisper · diarization · Presidio · local LLM | POC, on-prem ready |
+| 6 | [Agentic Commerce Gateway](./agentic-commerce/) | Multi-tenant MCP server that lets AI assistants search, check stock and order from local merchants | Node/TS · Postgres RLS · MCP · OAuth | 17 test suites green |
+| 7 | [Life OS](./life-os/) | Mobile second brain: capture, organise, plan, execute and track, offline-first | Expo/React Native · Supabase · pgvector | MVP paused |
+| 8 | [IELTS AI Tutor](./ielts-ai-tutor/) | Writing and speaking practice with instant feedback on 6 official criteria and 19 error types | React · Vite · OpenAI · Azure Speech | UI complete |
+| 9 | [Mongolian LLM Benchmark](./mongolian-llm-benchmark/) | Which open model can score a Mongolian call transcript like a quality analyst? | Python · Qwen · OpenRouter | Results published |
 
 ## Mongolian speech models
 
@@ -22,10 +24,10 @@ Mongolian has almost no open speech-AI support, so the voice platform runs on mo
 
 | Model | What it does | Headline result |
 |---|---|---|
-| [Whisper large-v3 — Mongolian LoRA](https://huggingface.co/Enkhbat0822/whisper-large-v3-mongolian) | Mongolian speech-to-text, including 8 kHz telephone audio | Word error rate 94.2 → **27.9** (telephony 103.7 → **36.3**), English preserved |
-| [CosyVoice 3 — Mongolian serving stack](https://huggingface.co/Enkhbat0822/cosyvoice3-mongolian) | Mongolian text-to-speech in production | Own voice, no cloud API, audio never leaves the country |
-| [CosyVoice 3 — Mongolian v2](https://huggingface.co/Enkhbat0822/cosyvoice3-mongolian-v2) / [v3](https://huggingface.co/Enkhbat0822/cosyvoice3-mongolian-v3) | The fine-tunes behind that voice | Emotion control kept by freezing the decoder |
-| [OmniVoice — Mongolian LoRA](https://huggingface.co/Enkhbat0822/omnivoice-mongolian-lora) | Alternative TTS backbone | 10.5 h of data, 43 min on one RTX 4090 |
+| [Whisper large-v3 — Mongolian LoRA](./speech-models/) | Mongolian speech to text, including 8 kHz telephone audio and Kazakh | Word error rate 94.2 → **14.7**; telephony 18.7; Kazakh 18.9 |
+| [OmniASR CTC 1B — Mongolian](./speech-models/) | Alternative recogniser with language-model decoding | FLEURS 36.6 → **18.2** once a KenLM language model is added |
+| [CosyVoice 3 — Mongolian](https://huggingface.co/Enkhbat0822/cosyvoice3-mongolian) | Mongolian text to speech in production, four fine-tune iterations | Own voice, no cloud API, audio never leaves the country |
+| [OmniVoice — Mongolian LoRA](https://huggingface.co/Enkhbat0822/omnivoice-mongolian-lora) | Alternative speech-synthesis backbone | 10.5 h of data, 43 minutes on one RTX 4090 |
 
 ## What ties them together
 - **Domain first.** Each tool solves a problem I ran into as an operator, WFM analyst or product owner — not a tutorial project.
