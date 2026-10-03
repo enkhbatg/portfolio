@@ -23,7 +23,27 @@ Generic transcription tools do not solve this in Mongolia: no Mongolian speech r
 
 **One rule the AI never breaks:** it never writes a decision, a motion or a resolution. Those are what the organisation is legally accountable for, so a human fills them in. The AI drafts everything around them.
 
-## 3. Architecture decisions
+## 3. Screenshots
+
+Names, email addresses and file names in these screenshots are masked; the data is from a local test environment.
+
+**Meeting list** — every meeting with its source (file, Teams, room, phone), duration, participants, status, how many action items are done, and who may see it. The counters at the top show processing time used, open tasks, overdue tasks, and speakers still waiting for a name to be confirmed.
+
+![Meeting list](screenshots/01-meetings-list.png)
+
+**My tasks** — each person sees only the action items assigned to them, with the due date and a play button that jumps to the exact moment in the recording where the commitment was made.
+
+![My tasks](screenshots/02-my-tasks.png)
+
+**Committees** — board, credit, audit and risk committees with members, quorum and voting rules, official protocol format and a resolution register. The card flags protocols waiting for approval and ones that are overdue.
+
+![Committees](screenshots/03-committees.png)
+
+**Settings** — the compliance surface. Speech-to-text and summarisation engines are chosen per purpose from a model registry, so one organisation can run everything on its own GPU while another uses a cloud model. Alongside: Microsoft 365, Gmail, personal mailbox, SMTP and a SIP phone bridge; voiceprint thresholds with an explicit rule that external people are never stored; and retention set separately for audio, transcript and committee minutes, with the statutory retention period applied to approved protocols.
+
+![Settings](screenshots/04-settings.png)
+
+## 4. Architecture decisions
 
 ```mermaid
 flowchart LR
@@ -44,7 +64,7 @@ flowchart LR
 - **Pluggable engines.** Speech-to-text and summarisation are selected per organisation from a model registry, because the compliance answer differs by customer: some can use a cloud model, others must stay on-premises.
 - **One mail gateway.** Every outbound email goes through a single sender with pluggable providers, rather than three code paths that drift apart.
 
-## 4. Delivery
+## 5. Delivery
 
 Built in two waves and shipped to production in October 2026: core capture, transcription, summary and mail first, then committees, Teams and mail integrations, voiceprints, retention, search and briefing.
 
@@ -56,11 +76,11 @@ Built in two waves and shipped to production in October 2026: core capture, tran
 
 A bug found during this work is worth recording: a meeting list was filtering by owner instead of by access control list, so a shared meeting could be invisible to someone who was granted access. It was caught by a role-policy test, not by clicking around.
 
-## 5. Why it is defensible
+## 6. Why it is defensible
 
 Mongolian language support, on-premises operation, the official protocol format and per-person task email exist individually in other tools. Nothing on the market does all four together, and the first two are the hard ones.
 
-## 6. Stack
+## 7. Stack
 
 Python · FastAPI · PostgreSQL · Nemotron streaming diarization · Whisper · pluggable LLM providers · Microsoft Graph · SMTP · ffmpeg
 
