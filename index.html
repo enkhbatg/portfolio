@@ -104,23 +104,23 @@
 <div class="grid">
 
   <a class="card" href="voiceos/">
-    <span class="status">In production</span>
+    <span class="status">Ran in production</span>
     <h3>VoiceOS</h3>
     <p>A customer calls a normal phone number and an AI operator answers in Mongolian within 2–3 seconds, looks up their data and resolves the request. Includes a 16-screen admin console and a bank on-prem edition.</p>
     <div class="tags"><span class="tag">Asterisk</span><span class="tag">LiveKit</span><span class="tag">Python</span><span class="tag">pgvector</span></div>
   </a>
 
   <a class="card" href="delegate/">
-    <span class="status">Core in production</span>
+    <span class="status">Core deployed</span>
     <h3>Delegate</h3>
     <p>An AI co-worker for every employee. Staff ask in chat; agents query internal databases, call tools and MCP servers, and wait for a human approval before anything risky.</p>
     <div class="tags"><span class="tag">Agents</span><span class="tag">MCP</span><span class="tag">Postgres RLS</span><span class="tag">FastAPI</span></div>
   </a>
 
   <a class="card" href="speech-models/">
-    <span class="status">In production</span>
+    <span class="status">Used by the voice platform</span>
     <h3>Mongolian Speech Models</h3>
-    <p>Fine-tuned speech recognition and synthesis for a language no cloud provider supports, down to bank servers with no GPU. Word error rate 94 → 15, with the measurement mistake that nearly hid it.</p>
+    <p>Fine-tuned speech recognition and synthesis for a language no cloud provider supports, down to bank servers with no GPU. 21.5 word error rate on unseen real calls, plus the measurement mistake that nearly hid the truth.</p>
     <div class="tags"><span class="tag">Whisper</span><span class="tag">NVIDIA NeMo</span><span class="tag">VoxCPM2</span><span class="tag">KenLM</span></div>
   </a>
 
@@ -183,7 +183,7 @@
     <tr>
       <td><a href="speech-models/">Whisper large-v3 — Mongolian LoRA</a></td>
       <td>Mongolian speech to text, including 8 kHz telephone audio and Kazakh</td>
-      <td>Word error rate 94.2 → <strong>14.7</strong>; telephony 18.7; Kazakh 18.9</td>
+      <td>FLEURS word error rate 87.0 → <strong>33.4</strong> on the same held-out clips; Kazakh 18.9</td>
     </tr>
     <tr>
       <td><a href="speech-models/">OmniASR CTC 1B — Mongolian</a></td>
@@ -193,7 +193,7 @@
     <tr>
       <td><a href="speech-models/">Nemotron streaming ASR — Mongolian</a></td>
       <td>Streaming recogniser for live calls in Mongolian, Kazakh, English and Russian</td>
-      <td>Bank-domain fine-tune running on CPU-only bank servers</td>
+      <td>Real calls: 63.0 → <strong>26.9</strong> on a fixed test set; <strong>21.5</strong> on 49 unseen calls (human-to-human floor 11.7); runs on CPU-only servers</td>
     </tr>
     <tr>
       <td><a href="speech-models/">VoxCPM2 — Mongolian LoRA</a></td>

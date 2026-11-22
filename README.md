@@ -8,8 +8,8 @@ Every project below is described with architecture, screenshots and results. **S
 
 | # | Project | One line | Stack | Status |
 |---|---|---|---|---|
-| 1 | [VoiceOS](./voiceos/) | Mongolian AI voice agent platform: a phone number answered by an AI operator in 2–3 seconds, with a 16-screen admin console | Asterisk · LiveKit · Python · FastAPI · Postgres/pgvector | Live in production; bank on-prem edition in testing |
-| 2 | [Delegate](./delegate/) | AI co-worker platform: staff ask in chat, agents act on internal systems, databases and MCP tools within risk tiers and approvals | Python · FastAPI · Postgres RLS · MCP · Claude / GPT / local LLMs | Core in production, Oct–Nov 2026 |
+| 1 | [VoiceOS](./voiceos/) | Mongolian AI voice agent platform: a phone number answered by an AI operator in 2–3 seconds, with a 16-screen admin console | Asterisk · LiveKit · Python · FastAPI · Postgres/pgvector | Ran in production on a carrier number Jul–Oct 2026; on-prem edition deployed in a bank test environment |
+| 2 | [Delegate](./delegate/) | AI co-worker platform: staff ask in chat, agents act on internal systems, databases and MCP tools within risk tiers and approvals | Python · FastAPI · Postgres RLS · MCP · Claude / GPT / local LLMs | Core deployed Oct–Nov 2026; pilot next |
 | 3 | [Mongolian Speech Models](./speech-models/) | Fine-tuned speech recognition and synthesis for a language no cloud provider supports, down to CPU-only bank servers | Whisper · NVIDIA NeMo · VoxCPM2 · Magpie TTS · KenLM | In production |
 | 4 | [Meeting Minutes Agent](./meeting-minutes/) | Recording to signed-off minutes in the official committee format, with per-person task emails | Diarization · FastAPI · Postgres · Microsoft Graph | Shipped Oct 2026 |
 | 5 | [Contact Centre WFM](./wfm-scheduler/) | Forecasting and shift scheduling with constraint optimisation | React · Node/Hono · FastAPI · OR-Tools CP-SAT · Postgres | v9.7, real contact-centre data |
@@ -25,9 +25,9 @@ Mongolian has almost no open speech-AI support, so the voice platform runs on mo
 
 | Model | What it does | Headline result |
 |---|---|---|
-| Whisper large-v3 — Mongolian LoRA | Mongolian speech to text, including 8 kHz telephone audio and Kazakh | Word error rate 94.2 → **14.7**; telephony 18.7; Kazakh 18.9 |
+| Whisper large-v3 — Mongolian LoRA | Mongolian speech to text, including 8 kHz telephone audio and Kazakh | FLEURS word error rate 87.0 → **33.4** on the same held-out clips; Kazakh 18.9 |
 | OmniASR CTC 1B — Mongolian | Alternative recogniser with language-model decoding | FLEURS 36.6 → **18.2** once a KenLM language model is added |
-| Nemotron streaming ASR — Mongolian | Streaming recogniser for live calls in Mongolian, Kazakh, English and Russian | Bank-domain fine-tune running on CPU-only bank servers |
+| Nemotron streaming ASR — Mongolian | Streaming recogniser for live calls in Mongolian, Kazakh, English and Russian | Trained on a contact centre's own call audio: word error rate 63.0 → **26.9** on a fixed 34-call test, **21.5** on 49 unseen real calls (human-to-human floor 11.7); runs on CPU-only servers |
 | VoxCPM2 — Mongolian LoRA | Main voice of the voice agent, on GPU | Real response time 7.4 → 5.5 s when it replaced the previous engine |
 | Magpie TTS — Mongolian | Speech synthesis for bank servers with no GPU | **322 ms** to first audio on a laptop CPU |
 

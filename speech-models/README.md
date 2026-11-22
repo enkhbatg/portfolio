@@ -14,14 +14,14 @@ Two public test sets, reported as **word error rate / character error rate**. Lo
 
 | System | FLEURS mn | Common Voice mn | Notes |
 |---|---|---|---|
-| Whisper large-v3, no fine-tuning | — | 94.2 / 48.0 | Effectively unusable for Mongolian |
-| **My Whisper large-v3 + LoRA (v3)** | 33.4 | **14.7** / — | Also 18.7 on 8 kHz telephony, 18.9 on Kazakh |
+| Whisper large-v3, no fine-tuning | 87.0 / 35.1 | 87.9 / 36.9 | Effectively unusable for Mongolian |
+| **My Whisper large-v3 + LoRA (v3)** | **33.4** / 12.6 | 14.7 / 6.9 ⚠ | Common Voice number is inflated (see below); 18.9 on Kazakh |
 | **My OmniASR CTC 1B fine-tune** | 36.6 / **10.7** | 35.7 / 9.4 | Better characters, worse words — no language model |
 | **OmniASR + KenLM decoding** | **18.2** / **5.4** | — | Language model closes most of the gap |
 | **My Nemotron streaming ASR, pilot** | 37.8 / 13.7 | — | Streaming, built for live calls; no hallucinated text on the test set |
 | Commercial Mongolian ASR API | 12.7 / 4.5 | — | The bar to beat |
 
-Fine-tuning takes Whisper from unusable to production-ready. Adding a KenLM language model to the CTC model halves its word error rate without any further training — the model knew the sounds, it just needed to know the words.
+Fine-tuning takes Whisper from unusable to usable: FLEURS word error rate falls from 87.0 to 33.4 on the same 186 held-out clips. Adding a KenLM language model to the CTC model halves its word error rate without any further training — the model knew the sounds, it just needed to know the words.
 
 ### The measurement mistake worth writing down
 
@@ -51,6 +51,21 @@ Whisper is accurate but not streaming, and a live phone call needs words as they
 A second fine-tune targets the bank itself: trained on the bank's own GPU during a one-month training window, on audio passed through a simulation of the bank's telephone channel. In production at the bank it has to run on **CPU-only servers**, so it is served through the open-source NeMo-Speech.cpp runtime, built for RHEL 8. The 8-bit quantised version started repeating words; the 16-bit version did not, and that is what the bank runs.
 
 A language-ID model labels each caller's language and keeps it for the call, so the right recogniser and the right human queue are chosen.
+
+### Results on real contact-centre calls
+
+Public benchmarks are read speech. Real calls are 8 kHz phone audio, with overlapping speakers and domain vocabulary. Training the streaming model on the deployment environment's own call audio is what moved it. Each round was measured on the same fixed test set of 34 real calls.
+
+| Model | Word error rate on the fixed 34-call test |
+|---|---|
+| Streaming pilot, public data only | 63.0 |
+| First fine-tune on the environment's calls | 43.7 |
+| After nine training rounds | **26.9** (character error rate 12.4) |
+| For comparison: two-model drafting pipeline (OmniASR CTC + KenLM + Nemotron as a silence gate) | 34.3 |
+
+On **49 further real calls never used in training** (human-reviewed transcripts, 11,283 words), the final model scored **21.5**. Two human transcribers disagree with each other by 11.7 on the same audio, so that is the practical floor.
+
+The drafting pipeline in the last row pre-labelled thousands of calls for human review. Later, segments where the fine-tuned model and the OmniASR drafts agreed (character error rate ≤ 0.1) became extra training data. After that, gains came from label quality rather than more hours.
 
 ## 2. Text to speech
 

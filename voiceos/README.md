@@ -2,7 +2,7 @@
 
 > A customer calls a normal phone number. An AI operator answers in Mongolian, understands the request, looks up the customer's data, and resolves it — or hands over to a human. Supervisors watch it live in a console.
 
-**Role:** solo builder (product, architecture, backend, console UI, ML fine-tuning) · **Period:** Jul 2026 – present · **Status:** live in production on a real phone number; bank on-prem edition in testing
+**Role:** solo builder (product, architecture, backend, console UI, ML fine-tuning) · **Period:** Jul 2026 – present · **Status:** ran in production on a real phone number Jul–Oct 2026; on-prem edition deployed in a bank test environment; now the CX app inside [Delegate](../delegate/)
 
 ---
 
@@ -70,14 +70,14 @@ flowchart LR
 **A partial deploy took production down** once. Config loader, tenancy and the main service now ship together, gated by lint and security checks.
 
 ## 4. Results
-- End-to-end Mongolian voice conversation over a real phone number, in production
+- End-to-end Mongolian voice conversation over a real carrier phone number (in production Jul–Oct 2026)
 - First response in 2–3 seconds, down from about 7.5
 - Bank on-prem edition with its own speech models on CPU and contact-centre integration, in testing
 - Console covering the full operator and supervisor workflow, 16 screens
 - Multi-tenant: organisations self-serve their own numbers, channels, knowledge bases and AI models
 - Own speech models replacing paid APIs — see the [speech models case study](../speech-models/)
 - Meeting-minutes agent built on the same platform — see [Meeting Minutes](../meeting-minutes/)
-- 3,179 automated tests, lint and security scan gating every deploy
+- 4,000+ automated tests, lint, security scan and golden agent/flow evaluations gating every deploy
 - Business plan and unit economics written for the Mongolian SME market
 
 ## 5. Screenshots

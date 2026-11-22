@@ -58,6 +58,19 @@ flowchart LR
 - One codebase serving both a hosted service and an on-prem bank installation
 - Voice agent, meeting-minutes agent and knowledge assistant all run as modules of the same platform
 
+**How I know it works**
+
+| Evaluation | Result |
+|---|---|
+| Golden agent tasks | 20/20 completed, 19/20 with the expected tool, 0 invented numbers |
+| "Never invent a number" sets | 14/14 and 10/10: answers "not in the system" instead of guessing |
+| Data-loss-prevention golden cases | 12/12 |
+| Prompt-injection red team | 32 attacks; 2 gaps found and fixed |
+| Knowledge search | Top-5 retrieval 72% → 88% with hybrid keyword + vector search (50 questions) |
+| Deploy gate | Lint, security scan and 4,000+ automated tests on every deploy |
+
+**Not done yet:** no pilot users yet; the multi-agent orchestrator is built but not exposed in the API.
+
 ## 5. Stack
 Python · FastAPI · PostgreSQL (row-level security, read-only roles) · pgvector · MCP (client, OAuth) · Claude · GPT · local LLMs · OCR · Microsoft Teams · SearXNG · vanilla JS single-page app
 
